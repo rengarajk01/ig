@@ -1,9 +1,5 @@
-"use client"
-
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -15,7 +11,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 
 export default function LoginPage() {
   const { login } = useAuth()
-  const router = useRouter()
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -40,7 +36,7 @@ export default function LoginPage() {
         )}.${Math.random().toString(36).substring(2)}`
 
         login(token, { email, name: email.split("@")[0] })
-        router.push("/credentials")
+        navigate("/credentials")
       } else {
         setError("Please enter both email and password")
       }

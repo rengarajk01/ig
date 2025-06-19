@@ -1,20 +1,19 @@
-"use client"
-
+import { useParams } from "react-router-dom"
 import { ProjectDashboard } from "@/components/project-dashboard"
 import { AppLayout } from "@/components/app-layout"
 import { ProtectedRoute } from "@/components/protected-route"
 
-interface ProjectPageProps {
-  params: {
-    id: string
+export default function ProjectPage() {
+  const { id } = useParams<{ id: string }>()
+  
+  if (!id) {
+    return <div>Project not found</div>
   }
-}
 
-export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <ProtectedRoute>
       <AppLayout>
-        <ProjectDashboard projectId={params.id} />
+        <ProjectDashboard projectId={id} />
       </AppLayout>
     </ProtectedRoute>
   )

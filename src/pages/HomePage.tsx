@@ -1,13 +1,11 @@
-"use client"
-
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "@/components/auth-provider"
 import { LoadingScreen } from "@/components/loading-screen"
 
 export default function HomePage() {
   const { isAuthenticated, isLoading } = useAuth()
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!isLoading) {
@@ -16,15 +14,15 @@ export default function HomePage() {
         const hasCredentials = localStorage.getItem("terraform-credentials-setup")
 
         if (hasCredentials) {
-          router.push("/projects")
+          navigate("/projects")
         } else {
-          router.push("/credentials")
+          navigate("/credentials")
         }
       } else {
-        router.push("/login")
+        navigate("/login")
       }
     }
-  }, [isAuthenticated, isLoading, router])
+  }, [isAuthenticated, isLoading, navigate])
 
   return <LoadingScreen />
 }

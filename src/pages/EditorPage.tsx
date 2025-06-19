@@ -1,5 +1,3 @@
-"use client"
-
 import { FileEditor } from "@/components/file-editor"
 import { AppLayout } from "@/components/app-layout"
 import { ProtectedRoute } from "@/components/protected-route"
